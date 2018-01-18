@@ -12,6 +12,6 @@ public class ModInfo {
     public static final String COMMON_PROXY = "gr8pefish.testmod.proxy.CommonProxy";
     public static final String CLIENT_PROXY = "gr8pefish.testmod.proxy.ClientProxy";
 
-    public static final String NETWORK_CHANNEL = "bdbgs";
+    public static final String NETWORK_CHANNEL = "tstmd";
 
 }

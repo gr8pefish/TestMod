@@ -1,1 +1,5 @@
-testmod.testText=Testing
+#Creative Tab
+itemGroup.testmod=Test Mod
+
+#Items
+item.testmod.strawberry.name=Strawberry
