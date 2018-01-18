@@ -1,0 +1,14 @@
+[{
+  "modid": "testmod",
+  "name": "Test Mod",
+  "description": "Basic testing skeleton code.",
+  "version": "${version}",
+  "mcversion": "1.12.2",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["gr8pefish"],
+  "credits": "The usual",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}]

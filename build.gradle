@@ -1,0 +1,173 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven { url "http://files.minecraftforge.net/maven" }
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+        classpath 'org.ajoberstar:gradle-git:0.10.1'
+    }
+}
+
+plugins {
+    id "net.minecraftforge.gradle.forge" version "2.0.2"
+    id 'com.matthewprenger.cursegradle' version '1.0.9'
+}
+
+apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: 'maven-publish'
+
+//set it so it has to be java 8
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+group = package_group
+archivesBaseName = mod_name
+version = "${mc_version}-${major_version}.${minor_version}.${build_number}"
+
+repositories {
+    maven { url "http://dvs1.progwml6.com/files/maven" }
+}
+
+minecraft {
+    version = "${mc_version}-${forge_version}"
+    runDir = "run"
+
+    useDepAts = true
+
+    replace "@VERSION@", project.version
+    replaceIn "Constants.java"
+
+    if (project.hasProperty('mappings_version'))
+        mappings = project.mappings_version
+}
+
+processResources {
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
+
+    from(sourceSets.main.resources.srcDirs) {
+        include '**/*.info'
+        include '**/*.properties'
+
+        expand 'version': project.version, 'mcversion': project.minecraft.version
+    }
+
+    from(sourceSets.main.resources.srcDirs) {
+        exclude '**/*.info'
+        exclude '**/*.properties'
+    }
+}
+
+if (JavaVersion.current().isJava8Compatible()) {
+    allprojects {
+        tasks.withType(Javadoc) {
+            options.addStringOption('Xdoclint:none', '-quiet')
+        }
+    }
+}
+
+jar {
+    classifier = ''
+    manifest.mainAttributes(
+        "Built-By": System.getProperty('user.name'),
+        "Created-By": "${System.getProperty('java.vm.version')} + (${System.getProperty('java.vm.vendor')})",
+        "Implementation-Title": project.name,
+        "Implementation-Version": project.version
+    )
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    from javadoc.destinationDir
+    classifier = 'javadoc'
+}
+
+tasks.withType(JavaCompile) { task ->
+    task.options.encoding = 'UTF-8'
+}
+
+publishing {
+    tasks.publish.dependsOn 'build'
+    publications {
+        mavenJava(MavenPublication) {
+            artifact jar
+            artifact sourceJar
+            artifact javadocJar
+        }
+    }
+    repositories {
+        if (project.hasProperty('maven_repo')) {
+            maven { url maven_repo }
+        } else {
+            mavenLocal()
+        }
+    }
+}
+
+String getChangelogText() {
+    def changelogFile = new File('changelog.txt')
+    String str = ''
+    String separator = '---'
+    int lineCount = 0
+    boolean done = false
+    changelogFile.eachLine {
+        if (done || it == null) {
+            return
+        }
+        if (lineCount < 3) {
+            lineCount++
+            if (it.startsWith(separator)) {return}
+        }
+        if (!it.startsWith(separator)) {
+            str += "$it" + (lineCount < 3 ? ':\n\n' : '\n')
+            return
+        }
+        done = true // once we go past the first version block, parse no more
+    }
+    str += "\n Look here for all 1.12 versions' changelogs: https://github.com/gr8pefish/BedBugs/blob/1.12/changelog.txt"
+    return str
+}
+
+curseforge {
+    if (project.hasProperty('curse_key_X'))
+        apiKey = project.curse_key_X
+
+    project {
+        id = "${curse_id}"
+        changelog = getChangelogText()
+        releaseType = release_type.toString()
+
+        addGameVersion '1.12'
+    }
+}
+
+task incrementVersionNumber {
+    ant.replace(file: "gradle.properties", token: "build_number=${build_number}", value: "build_number=${build_number.toString().toInteger() + 1}") //need to make sure it only increments build number
+}
+
+//Adds a new changelog segment for the next version. Nifty!
+task makeNewChangelog {
+    def changelogFile = new File('changelog.txt')
+    String newText = '------------------------------------------------------\n' +
+            'Version '+mc_version+" - "+major_version+"."+minor_version+"."+(build_number.toString().toInteger() + 1)+"\n" +
+            '------------------------------------------------------\n' +
+            'Additions\n' +
+            '- None\n' +
+            '\n' +
+            'Changes\n' +
+            '- None\n' +
+            '\n' +
+            'Bug Fixes\n' +
+            '- None\n'
+    String oldText = changelogFile.getText()
+    changelogFile.setText(newText + oldText);
+}
+
+//enforce correct order
+tasks.build.mustRunAfter clean
+tasks.incrementVersionNumber.mustRunAfter build
+tasks.makeNewChangelog.mustRunAfter incrementVersionNumber
+
+//curseforge uses these tasks
+tasks.curseforge.dependsOn clean, build, incrementVersionNumber, makeNewChangelog
