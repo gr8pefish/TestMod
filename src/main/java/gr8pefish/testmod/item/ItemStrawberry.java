@@ -1,10 +1,14 @@
 package gr8pefish.testmod.item;
 
 import gr8pefish.testmod.TestMod;
+import gr8pefish.testmod.api.IFood;
 import gr8pefish.testmod.util.ModInfo;
 import net.minecraft.item.Item;
 
-public class ItemStrawberry extends Item {
+/**
+ * Basic food item
+ */
+public class ItemStrawberry extends Item implements IFood {
 
     /** Field for use in unlocalized and registry naming*/
     public static final String STRAWBERRY_NAME = "strawberry";

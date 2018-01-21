@@ -3,3 +3,6 @@ itemGroup.testmod=Test Mod
 
 #Items
 item.testmod.strawberry.name=Strawberry
+
+#Blocks
+tile.testmod.crate.name=Crate
