@@ -1,8 +1,9 @@
-package gr8pefish.testmod.core;
+package gr8pefish.testmod;
 
-import gr8pefish.testmod.block.BlockCrate;
+import gr8pefish.testmod.block.crate.BlockCrate;
+import gr8pefish.testmod.block.helper.BlockTileEntity;
 import gr8pefish.testmod.item.ItemStrawberry;
-import gr8pefish.testmod.tile.TileEntityCrate;
+import gr8pefish.testmod.block.crate.TileEntityCrate;
 import gr8pefish.testmod.util.ModInfo;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -53,7 +54,7 @@ public class RegistrarTestMod {
         //Blocks
         event.getRegistry().register(CRATE.setRegistryName(BlockCrate.CRATE_NAME));
         //Set TEs
-        GameRegistry.registerTileEntity(TileEntityCrate.class, CRATE.getRegistryName().toString());
+        GameRegistry.registerTileEntity(TileEntityCrate.class, CRATE.getRegistryName().toString()); //Can't use CRATE.getTileEntityClass(), as it is Block type, not BlockCrate
     }
 
     /**

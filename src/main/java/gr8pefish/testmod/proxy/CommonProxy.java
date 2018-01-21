@@ -1,22 +1,25 @@
 package gr8pefish.testmod.proxy;
 
+import gr8pefish.testmod.TestMod;
+import gr8pefish.testmod.network.GuiHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 
-public class CommonProxy implements IProxy {
+public class CommonProxy {
 
-    @Override
+
     public void preInit(FMLPreInitializationEvent event) {
 
     }
 
-    @Override
-    public void init(FMLInitializationEvent event) {
 
+    public void init(FMLInitializationEvent event) {
+        NetworkRegistry.INSTANCE.registerGuiHandler(TestMod.instance, new GuiHandler());
     }
 
-    @Override
+
     public void postInit(FMLPostInitializationEvent event) {
 
     }

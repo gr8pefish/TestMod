@@ -1,8 +1,7 @@
 package gr8pefish.testmod;
 
-import gr8pefish.testmod.core.RegistrarTestMod;
+import gr8pefish.testmod.proxy.CommonProxy;
 import gr8pefish.testmod.util.ModInfo;
-import gr8pefish.testmod.proxy.IProxy;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Mod;
@@ -29,7 +28,7 @@ public class TestMod {
 
     //Proxies
     @SidedProxy(clientSide = ModInfo.CLIENT_PROXY, serverSide = ModInfo.COMMON_PROXY)
-    public static IProxy proxy;
+    public static CommonProxy proxy;
 
     //Mod Instance
     @Mod.Instance
