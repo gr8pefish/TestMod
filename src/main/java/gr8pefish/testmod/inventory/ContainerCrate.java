@@ -11,34 +11,41 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
+import javax.annotation.Nonnull;
+
+/**
+ * Adds a container for the crate
+ */
 public class ContainerCrate extends Container {
 
+    /** Setup the container with the correct slots */
     public ContainerCrate(InventoryPlayer playerInv, final TileEntityCrate crate) {
         IItemHandler inventory = crate.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.NORTH);
+        //Crate's inventory
         addSlotToContainer(new SlotItemHandler(inventory, 0, 80, 35) {
             @Override
             public void onSlotChanged() {
                 crate.markDirty();
             }
+            //ToDo: Barrel hidden internal inventory, and just show one slot
         });
 
+        //Player's inventory
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 9; j++) {
                 addSlotToContainer(new Slot(playerInv, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
             }
         }
 
+        //Player's hotbar
         for (int k = 0; k < 9; k++) {
             addSlotToContainer(new Slot(playerInv, k, 8 + k * 18, 142));
         }
     }
 
-    @Override
-    public boolean canInteractWith(EntityPlayer playerIn) {
-        return true;
-    }
 
     //Shift clicking
+    @Nonnull
     @Override
     public ItemStack transferStackInSlot(EntityPlayer player, int index) {
         ItemStack itemstack = ItemStack.EMPTY;
@@ -72,6 +79,11 @@ public class ContainerCrate extends Container {
         }
 
         return itemstack;
+    }
+
+    @Override
+    public boolean canInteractWith(@Nonnull EntityPlayer playerIn) {
+        return true;
     }
 
 }

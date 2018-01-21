@@ -9,31 +9,39 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 
+/**
+ * Gui for the crate
+ */
 public class GuiCrate extends GuiContainer {
 
+    /** Field to hold the background texture location */
     private static final ResourceLocation BG_TEXTURE = new ResourceLocation(ModInfo.MODID, "textures/gui/crate.png");
 
+    /** Field for the player's inventory */
     private InventoryPlayer playerInv;
 
+    /** Basic constructor */
     public GuiCrate(Container container, InventoryPlayer playerInv) {
         super(container);
         this.playerInv = playerInv;
     }
 
+    /** Draw background texture */
     @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-        GlStateManager.color(1, 1, 1, 1);
-        mc.getTextureManager().bindTexture(BG_TEXTURE);
-        int x = (width - xSize) / 2;
+        GlStateManager.color(1, 1, 1, 1); //no color
+        mc.getTextureManager().bindTexture(BG_TEXTURE); //bind backgorund texture
+        int x = (width - xSize) / 2; //math for correct size
         int y = (height - ySize) / 2;
-        drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
+        drawTexturedModalRect(x, y, 0, 0, xSize, ySize); //draw the background
     }
 
+    /** Draw foreground labels */
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-        String name = I18n.format(RegistrarTestMod.CRATE.getUnlocalizedName() + ".name");
-        fontRenderer.drawString(name, xSize / 2 - fontRenderer.getStringWidth(name) / 2, 6, 0x404040);
-        fontRenderer.drawString(playerInv.getDisplayName().getUnformattedText(), 8, ySize - 94, 0x404040);
+        String name = I18n.format(RegistrarTestMod.CRATE.getUnlocalizedName() + ".name"); //get crate name ("Crate")
+        fontRenderer.drawString(name, xSize / 2 - fontRenderer.getStringWidth(name) / 2, 6, 0x404040); //print crate name ("Crate")
+        fontRenderer.drawString(playerInv.getDisplayName().getUnformattedText(), 8, ySize - 94, 0x404040); //print player's inventory name ("Inventory")
     }
 
 }

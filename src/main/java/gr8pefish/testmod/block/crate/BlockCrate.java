@@ -17,9 +17,9 @@ import net.minecraftforge.items.IItemHandler;
 import javax.annotation.Nullable;
 
 /**
- * Basic block class
+ * Block with a TileEntity
  *
- * Has a linked TileEntity here: {@link TileEntityCrate}
+ * {@link TileEntityCrate}
  */
 public class BlockCrate extends BlockTileEntity<TileEntityCrate> {
 
@@ -31,6 +31,7 @@ public class BlockCrate extends BlockTileEntity<TileEntityCrate> {
         super(Material.ROCK, CRATE_NAME);
     }
 
+    //BlockTileEntity Methods
 
     @Override
     public Class<TileEntityCrate> getTileEntityClass() {
@@ -43,6 +44,19 @@ public class BlockCrate extends BlockTileEntity<TileEntityCrate> {
         return new TileEntityCrate();
     }
 
+    //Block Overrides
+
+    /**
+     * When the block is clicked:
+     *
+     * if not sneaking:
+     *      if empty hand:
+     *          remove items from crate
+     *      else:
+     *          place items into crate
+     * else:
+     *      open inventory GUI
+     */
     @Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
         if (!world.isRemote) {
@@ -62,13 +76,14 @@ public class BlockCrate extends BlockTileEntity<TileEntityCrate> {
         return true;
     }
 
+    /** When breaking the block, include the contents of the inventory. */
     @Override
     public void breakBlock(World world, BlockPos pos, IBlockState state) {
         TileEntityCrate tile = getTileEntity(world, pos);
         IItemHandler itemHandler = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.NORTH);
         ItemStack stack = itemHandler.getStackInSlot(0);
         if (!stack.isEmpty()) {
-            spawnAsEntity(world, pos, stack);
+            spawnAsEntity(world, pos, stack); //TODO: Doesn't drop main block
         }
         super.breakBlock(world, pos, state);
     }

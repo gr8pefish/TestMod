@@ -11,17 +11,18 @@ public class CommonProxy {
 
 
     public void preInit(FMLPreInitializationEvent event) {
-
+        //No-op
     }
 
 
     public void init(FMLInitializationEvent event) {
+        //Register the GuiHandler to allow for containers/guis to work properly
         NetworkRegistry.INSTANCE.registerGuiHandler(TestMod.instance, new GuiHandler());
     }
 
 
     public void postInit(FMLPostInitializationEvent event) {
-
+        //No-op
     }
 
 }

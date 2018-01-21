@@ -10,11 +10,14 @@ import net.minecraftforge.items.ItemStackHandler;
 import javax.annotation.Nullable;
 
 /**
- * Tile Entity (currently empty)
+ * Tile Entity that holds an inventory
  */
 public class TileEntityCrate extends TileEntity {
 
+    //Add 1 "slot"
     private ItemStackHandler inventory = new ItemStackHandler(1);
+
+    //Write/Read inventory to/from NBT
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
@@ -27,6 +30,8 @@ public class TileEntityCrate extends TileEntity {
         inventory.deserializeNBT(compound.getCompoundTag("inventory"));
         super.readFromNBT(compound);
     }
+
+    //Use Item Handler Capability
 
     @Override
     public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {

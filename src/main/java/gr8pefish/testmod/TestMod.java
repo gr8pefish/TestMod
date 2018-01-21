@@ -44,7 +44,6 @@ public class TestMod {
         proxy.init(event);
     }
 
-
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         proxy.postInit(event);
