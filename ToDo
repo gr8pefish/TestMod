@@ -2,6 +2,17 @@ To Do:
 
     NOW:
 
+        Add breaking texture
+        Fix white texture appearing on front panel
+
+        Place direction
+            Update bounding box
+        ItemStack to block
+
+        Variants for color https://mcforge.readthedocs.io/en/latest/blocks/blocks/#coloring-a-block
+            Base model then extend it?
+            Do this is main code, not testmod?
+        Legitimate TE
 
     LATER:
 

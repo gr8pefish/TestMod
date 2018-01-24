@@ -22,12 +22,15 @@ public class GuiHandler implements IGuiHandler {
 
     /** All the containerized items, mapped to unique IDs for ease of use*/
     public static final int CRATE = 0;
+    public static final int BACKPACK = 1;
 
     /** Initialize containers for the server */
     @Override
     public Container getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         switch (ID) {
             case CRATE:
+                return new ContainerCrate(player.inventory, (TileEntityCrate) world.getTileEntity(new BlockPos(x, y, z)));
+            case BACKPACK:
                 return new ContainerCrate(player.inventory, (TileEntityCrate) world.getTileEntity(new BlockPos(x, y, z)));
             default:
                 return null;
@@ -39,6 +42,8 @@ public class GuiHandler implements IGuiHandler {
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         switch (ID) {
             case CRATE:
+                return new GuiCrate(getServerGuiElement(ID, player, world, x, y, z), player.inventory);
+            case BACKPACK:
                 return new GuiCrate(getServerGuiElement(ID, player, world, x, y, z), player.inventory);
             default:
                 return null;
