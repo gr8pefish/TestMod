@@ -1,0 +1,8 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "testmod:items/backpack_basic_base",
+    "layer1": "testmod:items/backpack_basic_border",
+    "layer2": "testmod:items/backpack_basic_latch_dark"
+  }
+}

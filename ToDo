@@ -9,10 +9,9 @@ To Do:
             Update bounding box
         ItemStack to block
 
-        Variants for color https://mcforge.readthedocs.io/en/latest/blocks/blocks/#coloring-a-block
-            Base model then extend it?
-            Do this is main code, not testmod?
-        Legitimate TE
+        Main mod (new branch):
+            Correct registration (main mod?)
+            Legitimate TE
 
     LATER:
 

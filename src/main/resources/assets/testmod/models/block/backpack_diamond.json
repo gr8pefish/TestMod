@@ -1,7 +1,7 @@
 {
     "textures": {
-        "0": "ironbackpacks:models/packGoldMain",
-        "1": "ironbackpacks:models/packGoldPouch"
+        "0": "testmod:models/pack_diamond_main",
+        "1": "testmod:models/pack_diamond_pouch"
     },
     "elements": [
         {

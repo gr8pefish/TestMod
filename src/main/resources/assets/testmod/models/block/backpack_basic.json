@@ -2,14 +2,13 @@
 	"credit": "Made with Blockbench, a free, modern block model editor by JannisX11",
 	"textures": {
 		"2": "testmod:models/pack_basic_main",
-		"3": "models/pack_basic_pouch"
+		"3": "testmod:models/pack_basic_pouch"
 	},
 	"elements": [
 		{
 			"name": "Main",
 			"from": [5.8, 2, 1.3999999999999995],
 			"to": [10.2, 15.2, 14.600000000000001],
-			"shade": true,
 			"faces": {
 				"north": {"uv": [16, 0, 12, 12], "texture": "#2"},
 				"east": {"uv": [12, 0, 0, 12], "texture": "#2"},
@@ -36,7 +35,6 @@
 			"name": "pouch",
 			"from": [3.5999999999999996, 2, 3.5999999999999996],
 			"to": [5.8, 10.8, 12.4],
-			"shade": true,
 			"faces": {
 				"north": {"uv": [9, 0, 11, 8], "texture": "#3"},
 				"east": {"uv": [2, 2, 6, 6], "texture": "#3"},
@@ -54,7 +52,6 @@
 				3.5999999999999996
 			],
 			"to": [10.2, 2.1999999999999993, 12.4],
-			"shade": true,
 			"faces": {
 				"north": {"uv": [10, 10, 6, 12], "texture": "#2"},
 				"east": {"uv": [2, 10, 10, 12], "texture": "#2"},
@@ -72,7 +69,6 @@
 				3.5999999999999996
 			],
 			"to": [10.2, 16.1, 12.4],
-			"shade": true,
 			"faces": {
 				"north": {"uv": [11, 12, 8, 11], "texture": "#2"},
 				"east": {"uv": [1, 11, 9, 12], "texture": "#2"},

@@ -160,24 +160,7 @@ public class BlockBackpack extends BlockTileEntity<TileEntityBackpack> {
         return state.getValue(VARIANT).ordinal();
     }
 
-    //    "basic": {
-//      "model": "testmod:backpack_basic"
-//    },
-//    "iron": {
-//      "model": "testmod:backpack_iron"
-//    },
-//    "gold": {
-//      "model": "testmod:backpack_gold"
-//    },
-//    "diamond": {
-//      "model": "testmod:backpack_diamond"
-//    },
-//    "inventory": {
-//      "model": "testmod:backpack_basic",
-//      "transform": "forge:default-block"
-//    }
-//  }
-//}
+
 
 
 }
