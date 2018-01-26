@@ -56,7 +56,9 @@ public class ItemBackpack extends Item {
                     //try to place the backpack
                     Block backpackBlock = RegistrarTestMod.BACKPACK_BLOCK;
                     if (world.mayPlace(backpackBlock, pos.up(), false, side, player)) {
-                        world.setBlockState(pos.up(), backpackBlock.getBlockState().getBaseState().withProperty(BlockBackpack.VARIANT, this.backpackVariant));
+                        world.setBlockState(pos.up(), backpackBlock.getBlockState().getBaseState()
+                                .withProperty(BlockBackpack.BACKPACK_VARIANT, this.backpackVariant)
+                                .withProperty(BlockBackpack.FACING, player.getHorizontalFacing().getOpposite()));
                     }
                 }
             }

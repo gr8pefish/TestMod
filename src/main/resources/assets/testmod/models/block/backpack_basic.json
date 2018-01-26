@@ -2,7 +2,8 @@
 	"credit": "Made with Blockbench, a free, modern block model editor by JannisX11",
 	"textures": {
 		"2": "testmod:models/pack_basic_main",
-		"3": "testmod:models/pack_basic_pouch"
+		"3": "testmod:models/pack_basic_pouch",
+		"particle": "testmod:models/pack_basic_main"
 	},
 	"elements": [
 		{

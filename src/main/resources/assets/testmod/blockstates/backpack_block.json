@@ -1,19 +1,17 @@
 {
   "forge_marker": 1,
   "variants": {
-    "variant": {
-      "basic": {
-        "model": "testmod:backpack_basic"
-      },
-      "iron": {
-        "model": "testmod:backpack_iron"
-      },
-      "gold": {
-        "model": "testmod:backpack_gold"
-      },
-      "diamond": {
-        "model": "testmod:backpack_diamond"
-      }
+    "backpack_variant": {
+      "basic": { "model": "testmod:backpack_basic" },
+      "iron": { "model": "testmod:backpack_iron" },
+      "gold": { "model": "testmod:backpack_gold" },
+      "diamond": { "model": "testmod:backpack_diamond" }
+    },
+    "facing": {
+      "north": { "y": 90 },
+      "east": { "y": 180 },
+      "south": { "y": 270 },
+      "west": { "y": 0 }
     }
   }
 }
